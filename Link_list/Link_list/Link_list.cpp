@@ -30,7 +30,32 @@ public:
 };
 
 
+template<typename T>
+class Iterator 
+{
+public:
 
+	Iterator() { current_node = nullptr };
+
+	Iterator(Node<T>* inputNode) {
+		current_node = inputNode;
+	}
+
+	T& operator*() {
+		current_node->data;
+	}
+
+	bool operator==(const Iterator& other) {
+		return node == other.current_node;
+	}
+
+	bool operator!=(const Iterator& other) {
+		return node != other.current_node;
+	}
+
+	Node<T>* current_node;
+
+};
 
 template<typename T>
 class List 
@@ -46,16 +71,37 @@ public:
 	}
 
 	~List() {
+
+		while (size > 0) { pop_back(); }
 		delete head;
 		delete tail;
 	}
 
-	void push_back(const T& value) {
-
+	void push_back(const T& value) 
+	{
+		AddNode(tail, value);
 	}
 
 	void pop_back() {
 
+		RemoveNode(tail->preNode);
+	}
+
+	int size() { return size; }
+
+	using iterator = Iterator<T>();
+
+	Iterator begin() {
+		return Iterator<T>(head->postNode);
+	}
+
+	Iterator end() {
+		return Iterator<T>(tail);
+	}
+
+	Iterator insert(Iterator it, const T& value) {
+		Node<T>* node = AddNode(it->current_node, value);
+		return Iterator(node);
 	}
 private:
 	Node<T>* head;
@@ -75,7 +121,20 @@ private:
 		return newNode;
 	}
 
-	
+	Node<T>* RemoveNode(Node<T>* deleteNode) 
+	{
+		Node<T>* preNode = deleteNode->preNode;
+		Node<T>* postNode = deleteNode->postNode;
+
+		preNode->postNode = postNode;
+		postNode->preNode = preNode;
+
+		delete deleteNode;
+
+		size--;
+
+		return postNode;
+	}
 };
 
 
@@ -83,7 +142,9 @@ private:
 
 int main()
 {
- 
+	
+
+
 	
 }
 
