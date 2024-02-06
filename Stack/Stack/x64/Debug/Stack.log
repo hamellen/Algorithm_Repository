@@ -1,0 +1,6 @@
+﻿  Queue.cpp
+  Stack.cpp
+E:\Lookis\Algorithm_Repository\Stack\Stack\Stack.cpp(35,6): error C2365: 'Stack<T>::size': redefinition; previous definition was 'member function'
+E:\Lookis\Algorithm_Repository\Stack\Stack\Stack.cpp(29,6): message : see declaration of 'Stack<T>::size'
+E:\Lookis\Algorithm_Repository\Stack\Stack\Stack.cpp(36,2): message : see reference to class template instantiation 'Stack<T>' being compiled
+  Generating Code...
