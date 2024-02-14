@@ -74,11 +74,20 @@ void bfs(int start) {
 	}
 }
 
+void bfs_all() {
+
+	for (int i = 0; i < 6; i++) {
+		if (visited[i] == false) {
+			bfs(i);
+		}
+	}
+}
+
 int main()
 {
 	CreateGraph();
 	visited = vector<bool>(6, false);
-	bfs(0);
+	bfs_all();
 
 
 	//dfs_all();
