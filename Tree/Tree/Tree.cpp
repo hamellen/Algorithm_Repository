@@ -9,31 +9,33 @@
 
 using namespace std;
 
+using NodeRef = shared_ptr<struct Node>;
+
 struct Node {
 
 	Node(const string& input) {
 		data = input;
 	}
 	string data;
-	vector<Node*> children;
+	vector<NodeRef> children;
 };
 
-Node* CreateTree() {//트리 생성
+NodeRef CreateTree() {//트리 생성
 
-	Node* root = new Node("개발실");
+	NodeRef root = make_shared<Node>("개발실");
 	{
-		Node* node = new Node("디자인팀");
+		NodeRef node = make_shared<Node>("디자인");
 		root->children.push_back(node);
 		{
-			Node* leaf = new Node("전투");
+			NodeRef leaf = make_shared<Node>("전투");
 			node->children.push_back(leaf);
 		}
 		{
-			Node* leaf = new Node("경제");
+			NodeRef leaf = make_shared<Node>("경제");
 			node->children.push_back(leaf);
 		}
 		{
-			Node* leaf = new Node("스토리");
+			NodeRef leaf = make_shared<Node>("스토리");
 			node->children.push_back(leaf);
 		}
 	}
@@ -41,22 +43,110 @@ Node* CreateTree() {//트리 생성
 
 }
 
-void PrintTree(Node* root) {//재귀
+void PrintTree(NodeRef root) {//재귀
 
 	cout << root->data << endl;
 
-	for (Node* child : root->children) {
+	for (NodeRef child : root->children) {
 		PrintTree(child);
 	}
 
 }
 
+int GetHeight(NodeRef root) {
+
+	int height = 1;
+
+	for (NodeRef& child : root->children) {//자식노드가 존재할시 
+
+		height = max(height, GetHeight(child) + 1);
+
+	}
+
+
+
+	return height;
+}
+
+template<typename T>
+class PriorityQueue 
+{
+public:
+
+	void push(const T& value) {
+
+		_heap.push_back(value);
+
+		int now = _heap.size() - 1;
+
+		while (now>0)
+		{
+			int parent = (now - 1) / 2;
+
+			if (_heap[now] < _heap[parent]) {
+				break;
+			}
+
+			::swap(_heap[now], _heap[parent]);
+
+			now = parent;
+		}
+
+	}
+
+	void pop() {
+
+		_heap[0] = _heap.back();
+		_heap.pop_back();
+
+		int now = 0;
+
+		while (true) 
+		{
+			int left = 2 * now + 1;
+			int right = 2 * now + 2;
+
+			if (left >= _heap.size()) {//리프에 도달한 경우 
+				break;
+			}
+
+			int next = now;
+
+			if (_heap[next] < _heap[left]) {
+				next = left;
+			}
+
+			if (right < _heap.size() && _heap[next] < _heap[right]) {
+				next = right;
+			}
+
+			if (next == now) {
+				break;
+			}
+
+			::swap(_heap[now], _heap[next]);//값 바꾸ㅏ치기 
+			now = next;
+		}
+
+	}
+
+	T& top() {
+		return _heap[0];
+	}
+
+	bool empty() {
+		return _heap.empty();
+	}
+
+private:
+	 
+	vector<T> _heap = {};
+};
+
 int main()
 {
-	Node* root = CreateTree();
-
-	PrintTree(root);
-	return 0;
+	
+	
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

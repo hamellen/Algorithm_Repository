@@ -1,0 +1,3 @@
+﻿  Binary_tree.cpp
+E:\Lookis\Algorithm_Repository\Binary_tree\Binary_tree\Binary_tree.cpp(16,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Binary_tree.vcxproj -> E:\Lookis\Algorithm_Repository\Binary_tree\x64\Debug\Binary_tree.exe
