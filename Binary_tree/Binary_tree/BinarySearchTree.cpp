@@ -1,5 +1,16 @@
 #include "BinarySearchTree.h"
 
+BinarySearchTree::BinarySearchTree()
+{
+	_nil = new Node();
+	_root = _nil;
+}
+
+BinarySearchTree::~BinarySearchTree()
+{
+	delete _nil;
+}
+
 void BinarySearchTree::insert(int value)
 {
 
@@ -38,6 +49,28 @@ void BinarySearchTree::insert(int value)
 
 void BinarySearchTree::Delete(int key)
 {
+	Node* deleteNode = Search(_root, key);
+	Delete(deleteNode);
+
+}
+
+void BinarySearchTree::Delete(Node* node)
+{
+	if (node==nullptr) {//node 존재하지 않을시 
+		return;
+	}
+
+	if (node->left==nullptr) {//왼쪽자식만 없을시 
+		Replace(node, node->right);
+	}
+	else if (node->right == nullptr) {//오른쪽 자식만 없을시 
+		Replace(node, node->left);
+	}
+	else {//양쪽 자식 다 있을시 
+		Node* next = Next(node);
+		node->data = next->data;
+		Delete(next);
+	}
 
 }
 
@@ -74,6 +107,25 @@ void BinarySearchTree::Print_postorder(Node* node)
 
 }
 
+void BinarySearchTree::Replace(Node* u, Node* v)
+{
+	if (u->parent == nullptr) {
+		_root = v;
+	}
+	else if (u == u->parent->left) {//부모 노드가 조부모 노드의 왼쪽일경우 
+		u->parent->left = v;
+	}
+	else {//부모 노드가 조부모 노드의 오른쪽 일경우 
+		u->parent->right = v;
+	}
+
+	if (v) {//v의 부모를 u의 부모로 설정
+		v->parent = u->parent;
+	}
+
+
+}
+
 Node* BinarySearchTree::Search(Node* node,int key)
 {
 
@@ -107,6 +159,23 @@ Node* BinarySearchTree::Max(Node* node)
 	}
 
 	return node;
+}
+
+Node* BinarySearchTree::Next(Node* node)
+{
+	if (node->right) {
+		return Min(node->left);
+	}
+
+	Node* parent = node->parent;
+
+	while (parent && node == parent->right) {//왼쪽일시 다음 값의 노드 판별 
+		node = parent;
+		parent = parent->parent;
+	}
+
+
+	return parent;
 }
 
 
