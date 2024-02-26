@@ -1,6 +1,9 @@
 ﻿  Sorting.cpp
-E:\Lookis\Algorithm_Repository\Sorting\Sorting\Sorting.cpp(9,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-E:\Lookis\Algorithm_Repository\Sorting\Sorting\Sorting.cpp(9,14): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
-E:\Lookis\Algorithm_Repository\Sorting\Sorting\Sorting.cpp(25,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-E:\Lookis\Algorithm_Repository\Sorting\Sorting\Sorting.cpp(25,14): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+E:\Lookis\Algorithm_Repository\Sorting\Sorting\Sorting.cpp(10,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+E:\Lookis\Algorithm_Repository\Sorting\Sorting\Sorting.cpp(10,14): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+E:\Lookis\Algorithm_Repository\Sorting\Sorting\Sorting.cpp(26,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+E:\Lookis\Algorithm_Repository\Sorting\Sorting\Sorting.cpp(26,14): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+E:\Lookis\Algorithm_Repository\Sorting\Sorting\Sorting.cpp(46,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+E:\Lookis\Algorithm_Repository\Sorting\Sorting\Sorting.cpp(46,14): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+E:\Lookis\Algorithm_Repository\Sorting\Sorting\Sorting.cpp(140,24): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   Sorting.vcxproj -> E:\Lookis\Algorithm_Repository\Sorting\x64\Debug\Sorting.exe

@@ -80,17 +80,64 @@ void HeapSort(vector<int>& v) {
 
 }// 우선순위 큐 
 
-void MergeSort(vector<int>& v) {
 
-	MergeSort(v);
-	MergeSort(v);
+void MergeResult(vector<int>& v, int left, int mid, int right) {
+
+	int index_left = left;
+	int index_right = mid+1;
+	vector<int> temp;
+
+	while (index_left <= mid && index_right <= right) {//양쪽 배열 모두 기준 인덱스를 넘지 않았을 경우 
+
+		if (v[index_left] <= v[index_right]) {
+			temp.push_back(v[index_left]);
+			index_left++;
+		}
+		else {
+			temp.push_back(v[index_right]);
+			index_right++;
+		}
+	}
+
+	//한쪽 배열의 index가 기준 인덱스를 추가했을시 
+	//왼쪽 끝났으면 오른쪽 배열 ,오른쪽 끝났으면 왼쪽 배열 
+
+	if (index_left > mid) {//왼쪽 배열이 먼저 기준 인덱스를 넘어감 
+		while (index_right <= right) {
+			temp.push_back(v[index_right]);
+			index_right++;
+		}
+	}
+	else {
+		while (index_left <= mid) {
+			temp.push_back(v[index_left]);
+			index_left++;
+		}
+	}
+
+	for (int i = 0; i < temp.size(); i++) {
+		v[left + i] = temp[i];
+	}
+}
+
+void MergeSort(vector<int>& v,int left,int right) {
+
+	if (left >= right) {
+		return;
+	}
+	int mid = (left + right) / 2;
+
+	MergeSort(v,left,mid);
+	MergeSort(v,mid+1,right);
+
+	MergeResult(v, left, mid, right);
 }
 
 int main()
 {
 	vector<int> v{ 0,6,2,7,12 };
 
-	SelectionSort(v);
+	MergeSort(v,0,v.size()-1);
 
 	for (const int& ele : v) {
 		cout << ele << "\t";
