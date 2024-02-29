@@ -5,9 +5,7 @@
 using namespace std;
 #include <vector>
 
-struct Node {
-    Node* leader;
-};
+
 
 class NativeDisjointSet {
 public:
@@ -40,7 +38,7 @@ private:
     vector<int> parent;
 };
 
-class DisjointSet {
+class DisjointSet {//높이가 낮은 트리를 높이가 높은 트리의 루트 밑에 연결 
 public:
 
     DisjointSet(int n) : parent(n),rank(n,1) {
@@ -66,13 +64,14 @@ public:
             return;
         }
 
+
         if (rank[u]>rank[v]) {
-            swap(u, v);
+            swap(u, v); //rank[u]<= rank[v] 성사 
         }
 
-        parent[u] = v;
+        parent[u] = v;//랭크작은 트리가 랭크 높은 트리 밑으로 들어감 
 
-        if (rank[u] == rank[v]) {
+        if (rank[u] == rank[v]) {//높이가 같을시 이제 병합이 됐으므로 합병 되는 쪽의 랭크 상승 
             rank[v]++;
         }
     }
@@ -82,12 +81,7 @@ private:
 };
 int main()
 {
-    DisjointSet teams(1000);
-
-    teams.Merge(10, 1);
-
-    int teamid = teams.Find_boss(1);
-    cout << teamid << endl;
+    
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
