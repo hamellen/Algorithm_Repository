@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 #include <vector>
-
+#include<algorithm>
 
 
 class NativeDisjointSet {
@@ -78,10 +78,92 @@ public:
 private:
     vector<int> parent;
     vector<int> rank;//트리의 높이 
+};//트리의 높이에 따라 낮은 트리를 높은 트리에 
+
+struct Vertex {
+
+
 };
+
+vector<Vertex> vertices;
+vector<vector<int>> adjacent;//인접 행렬
+
+
+void CreateGraph() {
+    vertices.resize(6);
+    adjacent = vector<vector<int>>(6, vector<int>(6, -1));
+
+    adjacent[0][1] = adjacent[1][0] = 15;
+    adjacent[0][3] = adjacent[3][0] = 35;
+    adjacent[1][2] = adjacent[2][1] = 5;
+    adjacent[1][3] = adjacent[3][1] = 10;
+    adjacent[3][5] = adjacent[5][3] = 10;
+    adjacent[3][4] = adjacent[4][3] = 5;
+    adjacent[4][5] = adjacent[5][4] = 5;
+}
+
+struct CostEdge {
+    int cost;
+    int u;
+    int v;
+
+    bool operator<(CostEdge& other) {
+        return cost < other.cost;
+    }
+};
+
+int Kruskal(vector<CostEdge>& selected) {
+
+    int ret = 0;
+
+    selected.clear();
+
+    vector<CostEdge> edges;
+
+    for (int u = 0; u < adjacent.size(); u++) {
+        for (int v = 0; v < adjacent[u].size(); v++) {
+            if (u > v) {
+                continue;
+            }
+            
+            int cost = adjacent[u][v];
+
+            if (cost == -1) {
+                continue;
+            }
+            edges.push_back(CostEdge{ cost,u,v });//일단 연결 되어있는 엣지 수집 
+        }
+    }
+
+    sort(edges.begin(), edges.end());//오름 차순 ,코스트 작은 것 에서 높은 것순으로 정렬 
+
+    DisjointSet sets(vertices.size());
+
+    for (CostEdge& edge : edges) {
+
+        if (sets.Find_boss(edge.u) == sets.Find_boss(edge.v)) {//같은 보스를 모실시 순환 발생 
+            continue;
+        }
+
+        sets.Merge(edge.u, edge.v);
+        selected.push_back(edge);//최소 스패닝 트리에 최종 확정 
+        ret += edge.cost;
+    }
+
+    return ret;//최소 스패닝 트리의 최종 코스트 
+}
+
+
+
+
 int main()
 {
+    CreateGraph();
+
+    vector<CostEdge> selected;
+    int cost = Kruskal(selected);
     
+    cout << cost << endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
