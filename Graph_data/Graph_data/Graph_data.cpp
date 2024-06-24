@@ -95,10 +95,10 @@ void bfs(int start) {//자료구조 queue 를 사용함
 
 //다익스트라-bfs에서의 가중치 개념 추가,각 지점까지 가는데 최소 거리 측정,인접 행렬 사용
 
-void Dijikstra(int start) {
+void Dijikstra(int start) {//이해 못함 
 
 	list<VertexCost> discovered;
-	vector<int> minimal(6, -1);//정점별 최소거리 
+	vector<int> minimal(6, INT32_MAX);//정점별 최소거리 
 
 	discovered.push_back(VertexCost{start,0});
 	minimal[start] = 0;
@@ -106,7 +106,7 @@ void Dijikstra(int start) {
 	while (discovered.empty() == false) {
 
 		list<VertexCost>::iterator bestIt;
-		int bestCost = INT32_MAX;
+		int bestCost = INT32_MAX;//일부러 최대치 설정
 
 		for (auto it = discovered.begin(); it != discovered.end(); it++) {
 
@@ -114,6 +114,29 @@ void Dijikstra(int start) {
 				bestCost = it->cost;
 				bestIt = it;
 			}
+		}
+
+		int cost = bestIt->cost;
+		start = bestIt->vertex;
+		discovered.erase(bestIt);
+
+		if (minimal[start] < cost) {
+			continue;
+		}
+
+		for (int there = 0; there < 6; there++) {
+
+			if (adjacent[start][there] == -1) {
+				continue;
+			}
+
+			int nextcost = minimal[start] + adjacent[start][there];
+			if (nextcost >= minimal[there]) {
+				continue;
+			}
+			minimal[there] = nextcost;
+
+			discovered.push_back(VertexCost{ there,nextcost });
 		}
 
 	}
