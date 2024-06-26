@@ -1,2 +1,3 @@
 ﻿  Tree_data.cpp
+E:\Lookis\Algorithm_Repository\Tree_data\Tree_data\Tree_data.cpp(94,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   Tree_data.vcxproj -> E:\Lookis\Algorithm_Repository\Tree_data\x64\Debug\Tree_data.exe

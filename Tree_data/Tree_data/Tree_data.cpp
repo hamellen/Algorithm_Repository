@@ -6,6 +6,7 @@
 #include <list>
 #include <string>
 #include <queue>
+#include "BinarySearchTree.h"
 using namespace std;
 
 using NodeRef = shared_ptr<struct Node>;
@@ -88,10 +89,33 @@ int GetHeight(NodeRef root) {//犁蓖侩过
 
 }
 
+int BinarySearch(vector<int>& data, int key) {
+
+    int left = 0;
+    int right = data.size() - 1;
+
+    while (left <= right) {
+
+        int pivot = (left + right) / 2;
+
+        if (data[pivot] == key) {// 沤祸 己傍 
+
+            return pivot;
+        }
+        else if (data[pivot] < key) {
+
+            left = pivot + 1;
+        }
+        else if (data[pivot] > key) {
+
+            right = pivot - 1;
+        }
 
 
+    }
 
-
+    return -1;
+}
 
 
 
@@ -100,22 +124,15 @@ int main()
     //NodeRef root=CreateTree();
     //PrintTree(root,0);
     //cout << " 臭捞 : " << GetHeight(root) << endl;
+    //priority_queue<int> pq_max;//弥措 赛 
+    //priority_queue<int,vector<int>,greater<int>> pq_less;//弥家  赛 
 
-    priority_queue<int> pq_max;//弥措 赛 
-    priority_queue<int,vector<int>,greater<int>> pq_less;//弥家  赛 
+    BinarySearchTree bst;
 
-    pq_less.push(200);
-    pq_less.push(300);
-    pq_less.push(100);
-    pq_less.push(700);
-
-    while (pq_less.empty() == false) {
-
-        int value = pq_less.top();
-        pq_less.pop();
-
-        cout << value << endl;
-    }
+    bst.insert(7);
+    bst.insert(8);
+    bst.insert(3);
+    bst.insert(11);
 
 
 
