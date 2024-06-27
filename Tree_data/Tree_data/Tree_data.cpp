@@ -1,13 +1,14 @@
 // Tree_data.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include <iostream>
+
 #include <vector>
 #include <list>
 #include <string>
 #include <queue>
-#include "BinarySearchTree.h"
+#include<iostream>
 using namespace std;
+#include "BinarySearchTree.h"
 
 using NodeRef = shared_ptr<struct Node>;
 
@@ -129,12 +130,14 @@ int main()
 
     BinarySearchTree bst;
 
-    bst.insert(7);
-    bst.insert(8);
     bst.insert(3);
-    bst.insert(11);
+    bst.insert(8);
+    bst.insert(9);
+    bst.insert(1);
 
+    cout << bst.root->data << endl;
 
+    //bst.in_order(bst.root);
 
 }
 
