@@ -6,6 +6,7 @@
 #include <queue>
 #include <iostream>
 using namespace std;
+#include "BinarySearchTree.h"
 
 int BinarySearch(vector<int>& data, int key) {
 
@@ -39,9 +40,16 @@ int BinarySearch(vector<int>& data, int key) {
 
 int main()
 {
+    BinarySearchTree bst;
+
+    bst.insert(10);
+    bst.insert(20);
+    bst.insert(5);
+  
+    
+
    
-
-
+    cout << 1 << endl;
 }
 
 

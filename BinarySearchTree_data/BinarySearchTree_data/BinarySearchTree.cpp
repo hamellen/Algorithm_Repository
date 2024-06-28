@@ -46,14 +46,15 @@ void BinarySearchTree::insert(int key)
 
 	while (node) {//node가 nullptr 일경우 삽입할 장소 찾음 ,while  중단 
 
+		parent = node;
 		if (node->data < key) {
 
-			parent = node;
+			//parent = node;
 			node = parent->_right;
 
 		}
 		else if (node->data > key) {
-			parent = node;
+			//parent = node;
 			node = parent->_left;
 
 		}
@@ -67,3 +68,109 @@ void BinarySearchTree::insert(int key)
 		parent->_left = newNode;
 	}
 }
+
+void BinarySearchTree::Delete(int key)
+{
+
+
+}
+
+Node* BinarySearchTree::get_root()
+{
+	return root;
+}
+
+Node* BinarySearchTree::Search(Node* node, int key)
+{
+	if (node == nullptr || node->data == key) {
+		return node;
+	}
+	
+	if (key < node->data) {
+		return Search(node->_left, key);
+	}
+	else if (key > node->data) {
+		return Search(node->_right, key);
+	}
+
+
+	return node;
+}
+
+Node* BinarySearchTree::Search2(Node* node, int key)
+{
+	while (node && node->data != key) {
+
+		if (node->data < key) {
+			node = node->_right;
+		}
+		else if (node->data > key) {
+			node = node->_left;
+		}
+
+	}
+
+
+	return node;
+}
+
+Node* BinarySearchTree::Min(Node* _node)
+{
+	Node* parent = nullptr;
+	Node* node = _node;
+
+
+
+	while (node) {
+		parent = node;
+		node = parent->_left;
+	}
+	return parent;
+}
+
+Node* BinarySearchTree::Max(Node* _node)
+{
+	Node* parent = nullptr;
+	Node* node = _node;
+
+	while (node) {
+		parent = node;
+		node = parent->_right;
+	}
+
+
+	return parent;
+}
+
+Node* BinarySearchTree::Next(Node* _node)
+{
+	if (_node->_right) {//right노드 존재할시-right 노드 트리안에서 제일 작은 값노드 찾기 
+		return Min(_node->_right);
+	}
+
+	Node* parent = _node->_parent;
+
+	while (parent && _node == parent->_right) {//자식이 부모의 오른쪽 노드라는 것은 자식이 부모보다 크다는 것을 의미 
+
+		_node = parent;
+		parent = parent->_parent;
+	}
+
+
+	return parent;
+}
+
+//void BinarySearchTree::PRE()
+//{
+//	pre_order(root);
+//}
+//
+//void BinarySearchTree::IN()
+//{
+//	in_order(root);
+//}
+//
+//void BinarySearchTree::POST()
+//{
+//	post_order(root);
+//}

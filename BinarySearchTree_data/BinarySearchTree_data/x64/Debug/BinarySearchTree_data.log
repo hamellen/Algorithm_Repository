@@ -1,0 +1,5 @@
+﻿  BinarySearchTree.cpp
+  BinarySearchTree_data.cpp
+E:\Lookis\Algorithm_Repository\BinarySearchTree_data\BinarySearchTree_data\BinarySearchTree_data.cpp(14,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+  BinarySearchTree_data.vcxproj -> E:\Lookis\Algorithm_Repository\BinarySearchTree_data\x64\Debug\BinarySearchTree_data.exe

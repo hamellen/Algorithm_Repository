@@ -1,0 +1,3 @@
+﻿  Sort_data.cpp
+E:\Lookis\Algorithm_Repository\Sort_data\Sort_data\Sort_data.cpp(22,14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Sort_data.vcxproj -> E:\Lookis\Algorithm_Repository\Sort_data\x64\Debug\Sort_data.exe
