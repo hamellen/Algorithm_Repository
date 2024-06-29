@@ -71,6 +71,17 @@ void BinarySearchTree::insert(int key)
 
 void BinarySearchTree::Delete(int key)
 {
+	Node* deleteNode = Search(get_root(), key);
+	if (deleteNode) {
+		Delete(deleteNode);
+	}
+	
+
+}
+
+void BinarySearchTree::Delete(Node* node)
+{
+
 
 
 }

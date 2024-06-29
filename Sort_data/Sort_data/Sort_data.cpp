@@ -83,11 +83,62 @@ void heap_sort(vector<int>& arr) {//힙정렬,힙의 특성 사용 O(NlogN)
 	}
 
 }
-void merge_sort(vector<int>& arr) {//병합정렬 ,분할-정복-결합
+
+void merge_result(vector<int>& v, int left,int mid, int right) {//실질적 정렬 
+
+	int index_left = left;
+	int index_right = mid + 1;
+	vector<int> temp;
+
+	while (index_left <= mid && index_right <= right) {
+
+		if (v[index_left] <= v[index_right]) {
+			temp.push_back(v[index_left]);
+			index_left++;
+		}
+		else if (v[index_left] > v[index_right]) {
+			temp.push_back(v[index_right]);
+			index_right++;
+		}
+	}
+
+	if (index_left > mid) {
+
+		while (index_right <= right) {
+			temp.push_back(v[index_right]);
+			index_right++;
+		}
+	}
+	else {
+		while (index_left <= mid) {
+			temp.push_back(v[index_left]);
+			index_left++;
+		}
+
+		
+	}
+
+	for (int i = 0; i < temp.size(); i++) {
+
+		v[left + i] = temp[i];
+	}
+
+}
+void merge_sort(vector<int>& v,int left,int right) {//병합정렬 ,분할-정복-결합
+
+	if (left >= right) {
+		return;
+	}
+
+	int mid = (left + right) / 2;
+	merge_sort(v, left, mid);
+	merge_sort(v, mid+1, right);
+
+	merge_result(v, left, mid, right);
+}
 
 
-
-
+void quick_sort(vector<int>& v) {
 
 }
 
@@ -99,6 +150,9 @@ int main()
 	//bubble_sort(v);
 	//insert_sort(v);
 	//heap_sort(v);
+	//merge_sort(v, 0, v.size() - 1);
+
+
 	for (int i = 0; i < v.size(); i++) {
 		cout << v[i] ;
 		if (i==v.size()-1) {

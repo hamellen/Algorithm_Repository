@@ -24,6 +24,7 @@ public:
 	void post_order(Node* node);
 	void insert(int key);
 	void Delete(int key);
+	void Delete(Node* node);
 	Node* get_root();
 
 	Node* Search(Node* node, int key);//Àç±Í
