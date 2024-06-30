@@ -11,7 +11,7 @@ struct Node {
 
 class BinarySearchTree
 {
-private:
+public:
 
 	Node* root = nullptr;
 public:
@@ -25,6 +25,7 @@ public:
 	void insert(int key);
 	void Delete(int key);
 	void Delete(Node* node);
+	void Replace(Node* u, Node* v);
 	Node* get_root();
 
 	Node* Search(Node* node, int key);//Àç±Í

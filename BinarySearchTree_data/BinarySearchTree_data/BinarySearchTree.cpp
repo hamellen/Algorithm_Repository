@@ -82,8 +82,34 @@ void BinarySearchTree::Delete(int key)
 void BinarySearchTree::Delete(Node* node)
 {
 
+	if (node->_left == nullptr) {//삭제할려는 노드의 왼쪽이 없을경우 
+		Replace(node, node->_right);
+	}
+	else if (node->_right == nullptr) {//삭제할려는 노드의 오른쪽이 없을경우 
+		Replace(node, node->_left);
+	}
+	else {//삭제할려는 노드의 양쪽이 있을경우 
+		Node* next = Next(node);//삭제할려는 노드의 다음 값 노드가져오기 
+		node->data = next->data;//삭제할려는 노드의 값에 다음 값 노드의 값 입력 
+		Delete(next);//다음 값 노드 삭제 
+	}
+}
 
+void BinarySearchTree::Replace(Node* u, Node* v)//u의 서브트리를 v의 서브트리로 교체 ,u의 노드 자리를 v로 대체 
+{
+	if (u->_parent == nullptr) {//u가 루트노드일시 
+		root = v;
+	}else if (u == u->_parent->_left) {
+		u->_parent->_left = v;
+	}
+	else if(u == u->_parent->_right){
+		u->_parent->_right = v;
+	}
 
+	if (v) {
+		v->_parent = u->_parent;
+	}
+	delete u;
 }
 
 Node* BinarySearchTree::get_root()
